@@ -1,95 +1,96 @@
 <?php
 class RGBcolor
 {
-    private $Red;
-    private $Blue;
-    private $Green;
+    private $red;
+    private $blue;
+    private $green;
 
-    public function __construct($Red,$Green,$Blue)
+    public function __construct($red,$green,$blue)
     {
-        $this->setR($Red);
-        $this->setB($Blue);
-        $this->setG($Green);
+        $this->setRed($red);
+        $this->setBlue($blue);
+        $this->setGreen($green);
     }
 
-    private function setR($Red)
+    private function setRed($red)
     {
-       if(!is_int($Red)){
+       if(!is_int($red)){
            throw new Exception('Invalid integer');
        }
-       if($Red>255 and $Red<0){
+       if($red>255 and $red<0){
            throw new Exception('Number must be in range 0->255');
        }
-       $this->Red=$Red;
+       $this->red=$red;
     }
-    private function setB($Blue)
+    private function setBlue($blue)
     {
-        if(!is_int($Blue)){
+        if(!is_int($blue)){
             throw new Exception('Invalid integer');
         }
-        if($Blue>255 and $Blue<0){
+        if($blue>255 and $blue<0){
             throw new Exception('Number must be in range 0->255');
        }
-        $this->Blue=$Blue;
+        $this->blue=$blue;
     }
-    private function setG($Green)
+    private function setGreen($green)
     {
-        if(!is_int($Green)){
+        if(!is_int($green)){
             throw new Exception('Invalid integer');
         }
-        if($Green>255 and $Green<0){
+        if($green>255 and $green<0){
             throw new Exception('Number must be in range 0->255');
        }
-        $this->Green=$Green;
+        $this->green=$green;
     }
-    public function getR(){
-        return $this->Red;
+    public function getRed(){
+        return $this->red;
     }
-    public function getB(){
-        return $this->Blue;
+    public function getBlue(){
+        return $this->blue;
     }
-    public function getG(){
-        return $this->Green;
+    public function getGreen(){
+        return $this->green;
     }
     public function equal(RGBcolor $color){
-        if($this->Red != $color->Red){
-            echo 'Colors are not equal by red color';
+        if($this->red != $color->red){
+
             return false;
         }
-        if($this->Blue != $color->Blue){
-            echo 'Colors are not equal by blue color';
+        if($this->blue != $color->blue){
+
             return false;
         }
-        if($this->Green != $color->Green){
+        if($this->green != $color->green){
             echo 'Colors are not equal by green color';
             return false;
         }
-        echo 'Colors are equal';
+
         return true;
     }
-    public static function random_color(){
+    public static function randomColor(){
         return new RGBcolor(rand(0,255),rand(0,255),rand(0,255));
     }
-    public function mix_color(RGBcolor $color ){
+    public function mixColor(RGBcolor $color ){
 
 
 
 
-        return new RGBcolor(($this->Red +$color->Red)/2,($this->Green +$color->Green)/2,($this->Blue +$color->Blue)/2);
+        return new  RGBcolor((int)($this->red +$color->red)/2,(int)($this->green +$color->green)/2,(int)($this->blue +$color->blue)/2);
     }
 }
 
 $x= new RGBcolor(13,165,213);
-var_dump(RGBcolor::random_color());
+var_dump(RGBcolor::randomColor());
 var_dump($x);
 $color = new RGBcolor(200, 200, 200);
-$mixedColor = $color->mix_color(new RGBcolor(100, 100, 100));
-$mixedColor->getR(); // 150
-$mixedColor->getG(); // 150
-$mixedColor->getB(); // 150
+$mixedColor = $color->mixColor(new RGBcolor(100, 100, 100));
+$mixedColor->getRed(); // 150
+$mixedColor->getGreen(); // 150
+$mixedColor->getBlue(); // 150
 
 var_dump($mixedColor);
 
+$bgColor = RGBcolor::randomColor();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -97,7 +98,7 @@ var_dump($mixedColor);
     <meta charset="utf-8">
     <title>Тег CODE</title>
 </head>
-<body bgcolor='<?php echo RGBcolor::random_color()->getR().",". RGBcolor::random_color()->getB().",". RGBcolor::random_color()->getG(); ?>'>
+<body bgcolor='<?php echo $bgColor->getRed().",".  $bgColor->getGreen().",". $bgColor->getBlue(); ?>'>
 
 </body>
 </html>
